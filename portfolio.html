@@ -237,15 +237,9 @@ h1.hero-name{font-family:'DM Serif Display',serif;font-size:clamp(3.8rem,5.8vw,6
 @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
 .ph-placeholder .ph-hint{font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.09em;opacity:.4;line-height:1.65}
 
-.upload-fab{
-  position:absolute;bottom:calc(14.6% - 19px);right:calc(14.6% - 19px);
-  width:38px;height:38px;background:var(--gold);border-radius:50%;border:none;
-  display:flex;align-items:center;justify-content:center;
-  cursor:pointer;box-shadow:0 3px 18px rgba(201,168,76,.55);
-  transition:all .22s;z-index:10
-}
-.upload-fab:hover{transform:scale(1.16);box-shadow:0 5px 28px rgba(201,168,76,.75)}
-.upload-fab svg{color:var(--ink)}
+/* ══ HIDE ONLY THE UPLOAD FAB BUTTONS ══ */
+.upload-fab { display: none !important; }
+.about-fab  { display: none !important; }
 
 .photo-chips{display:flex;flex-wrap:wrap;gap:.42rem;justify-content:center;margin-top:1.7rem}
 .pchip{
@@ -291,8 +285,6 @@ section{position:relative;z-index:1}
 .about-ph{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.9rem;color:var(--text-dimmer);text-align:center;padding:2rem;background:linear-gradient(145deg,rgba(201,168,76,.03),rgba(74,140,127,.02))}
 .about-ph svg{opacity:.22}
 .about-ph span{font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.08em;opacity:.38;line-height:1.65}
-.about-fab{position:absolute;bottom:13px;right:13px;width:34px;height:34px;background:var(--gold);border-radius:50%;border:none;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 4px 14px rgba(201,168,76,.4);transition:all .2s}
-.about-fab:hover{transform:scale(1.12)}
 .a-stats{display:grid;grid-template-columns:1fr 1fr;gap:.52rem;margin-top:.95rem}
 .ast{background:var(--ink2);border:1px solid var(--border);border-radius:var(--r);padding:.85rem;text-align:center;transition:border-color .25s,transform .25s}
 .ast:hover{border-color:var(--border-h);transform:translateY(-2px)}
@@ -546,7 +538,7 @@ footer{
 @keyframes blink{0%,100%{opacity:1}50%{opacity:.22}}
 @keyframes rise{from{opacity:0;transform:translateY(15px)}to{opacity:1;transform:translateY(0)}}
 
-/* ── RESPONSIVE ── */
+/* ── ORIGINAL TABLET BREAKPOINT ── */
 @media(max-width:1060px){
   nav{padding:0 1.8rem}
   .sg-grid{grid-template-columns:1fr}
@@ -556,32 +548,111 @@ footer{
   .c-row{grid-template-columns:1fr}
   .cert-grid{grid-template-columns:1fr 1fr}
 }
+
+/* ══════════════════════════════════════════
+   MOBILE — 820px and below (PHONE FIX)
+   ══════════════════════════════════════════ */
 @media(max-width:820px){
-  nav{padding:0 1.5rem}
-  .nav-links{display:none}
-  .nav-end .nav-cta{padding:.38rem .9rem;font-size:.68rem}
-  .hamburger{display:flex}
-  .nav-logo{min-width:auto}
-  .nav-end{min-width:auto}
-  .hero{grid-template-columns:1fr;gap:3rem;padding:7rem 1.5rem 5rem}
-  .h-photo-col{width:200px;margin:0 auto}
-  .sec{padding:4.5rem 1.5rem}
-  .dline{margin:0}
-  footer{padding:1.4rem 1.5rem;flex-direction:column;gap:.5rem;text-align:center}
-  .foot-center{display:none}
-  .foot-r{text-align:center}
-  .about-left{grid-template-columns:1fr}
-  .pj-header{flex-direction:column;align-items:flex-start}
-  .pj-bnum{display:none}
-  .vals{grid-template-columns:1fr}
-  .cert-grid{grid-template-columns:1fr}
-}
-@media(max-width:480px){
-  h1.hero-name{font-size:3.2rem}
-  .h-photo-col{width:240px}
-  #btt{bottom:1.2rem;right:1.2rem}
+  /* Hide desktop cursor on touch */
+  body { cursor: auto; }
+  #cur, #cur-ring { display: none; }
+
+  /* NAV */
+  nav { padding: 0 1.2rem; height: 60px; }
+  .nav-logo { left: 1.2rem; font-size: 1.3rem; }
+  .nav-end { right: 1.2rem; }
+  .nav-links { display: none; }
+  .nav-cta { padding: .36rem .85rem; font-size: .65rem; }
+  .hamburger { display: flex; }
+
+  /* HERO — stack vertically, photo on top */
+  .hero {
+    grid-template-columns: 1fr;
+    padding: 5.5rem 1.4rem 3.5rem;
+    gap: 2.2rem;
+    text-align: center;
+  }
+  /* Move photo above text */
+  .h-photo-col { order: -1; width: 190px; margin: 0 auto; }
+  .photo-chips { display: none; }
+
+  .h-kicker { justify-content: center; }
+  .h-greeting { font-size: 1.1rem; }
+  h1.hero-name { font-size: clamp(2.8rem, 10vw, 4rem); }
+  .role-line { justify-content: center; }
+  .h-bio { font-size: .9rem; margin-left: auto; margin-right: auto; }
+  .h-btns { justify-content: center; }
+  .h-stats { justify-content: center; flex-wrap: wrap; gap: 1.2rem; }
+  .hs-sep { display: none; }
+
+  /* SECTIONS */
+  .sec { padding: 3.5rem 1.4rem; }
+  .sec-h { font-size: clamp(1.6rem, 6vw, 2.1rem); margin-bottom: 1.8rem; }
+
+  /* ABOUT */
+  .about-left {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    grid-template-columns: unset;
+  }
+  .about-card { width: 180px; }
+  .a-stats { width: 100%; grid-template-columns: repeat(4, 1fr); gap: .35rem; }
+  .ast { padding: .6rem .3rem; }
+  .ast-n { font-size: 1.2rem; }
+  .ast-l { font-size: .48rem; }
+  .about-right h3 { font-size: 1.45rem; }
+  .vals { grid-template-columns: 1fr; }
+
+  /* PROJECTS */
+  .pj-header { flex-direction: column; align-items: flex-start; gap: .6rem; }
+  .pj-bnum { display: none; }
+
+  /* CERTIFICATIONS */
+  .cert-grid { grid-template-columns: 1fr; }
+  .cert-card:last-child:nth-child(3n-1) { grid-column: auto; }
+
+  /* SKILLS */
+  .sg-grid { grid-template-columns: 1fr; }
+  .sg { padding: 1.3rem; }
+
+  /* CONTACT */
+  .c-row { grid-template-columns: 1fr; }
+
+  /* FOOTER */
+  footer { padding: 1.2rem 1.4rem; flex-direction: column; gap: .4rem; text-align: center; }
+  .foot-center { display: none; }
+  .foot-r { text-align: center; }
+
+  /* BACK TO TOP */
+  #btt { bottom: 1rem; right: 1rem; }
+
+  /* MOBILE MENU */
+  .mobile-menu a { font-size: 1.7rem; }
+  .mobile-menu { gap: 1.5rem; }
 }
 
+/* ── SMALL PHONES — 480px ── */
+@media(max-width:480px){
+  nav { height: 56px; }
+  .nav-logo { font-size: 1.15rem; }
+  .nav-cta { display: none; }
+
+  .hero { padding: 5rem 1.1rem 3rem; }
+  .h-photo-col { width: 160px; }
+  h1.hero-name { font-size: clamp(2.5rem, 11vw, 3.2rem); }
+
+  .h-btns { flex-direction: column; align-items: center; }
+  .btn { width: 100%; max-width: 260px; justify-content: center; }
+
+  .sec { padding: 3rem 1.1rem; }
+
+  .about-card { width: 150px; }
+  .a-stats { grid-template-columns: 1fr 1fr; }
+
+  .mobile-menu a { font-size: 1.5rem; }
+}
 
 .about-card{
     position: relative;
@@ -595,9 +666,6 @@ footer{
     display:block;
     border-radius:24px;
 }
-
-
-
 </style>
 </head>
 <body>
@@ -620,7 +688,6 @@ footer{
   <a href="#education" onclick="closeMob()">Education</a>
   <a href="#skills" onclick="closeMob()">Skills</a>
   <a href="#contact" onclick="closeMob()">Contact</a>
-  <!-- ✅ FIX: Mobile Hire Me → opens Gmail compose with your email pre-filled in To: -->
   <a href="https://mail.google.com/mail/?view=cm&to=nihahawasniha148@gmail.com&su=Hiring+Inquiry" target="_blank" class="mob-cta" onclick="closeMob()">Hire Me →</a>
 </div>
 
@@ -641,7 +708,6 @@ footer{
   </ul>
 
   <div class="nav-end">
-    <!-- ✅ FIX: Hire Me → opens Gmail compose with your email in To: field -->
     <a href="https://mail.google.com/mail/?view=cm&to=nihahawasniha148@gmail.com&su=Hiring+Inquiry" target="_blank" class="nav-cta">
       Hire Me
       <svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
@@ -683,7 +749,6 @@ footer{
             View My Work
             <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
           </a>
-          <!-- ✅ FIX: Get in Touch → opens Gmail compose with your email in To: field -->
           <a href="https://mail.google.com/mail/?view=cm&to=nihahawasniha148@gmail.com&su=Let%27s+Connect" target="_blank" class="btn btn-ghost">
             Get in Touch
           </a>
@@ -705,7 +770,7 @@ footer{
           <div class="pr-ring"></div>
           <div class="o-dot-b"></div>
 
-          <div class="photo-circle" id="heroCircle" onclick="document.getElementById('heroUpload').click()">
+          <div class="photo-circle" id="heroCircle">
             <div class="ph-placeholder" id="heroPH" style="display:none;">
               <div class="ph-emoji">👩‍💻</div>
               <div class="ph-hint">Click to add<br>your photo</div>
@@ -713,6 +778,7 @@ footer{
              <img src="IMG_0666 - Copy.jpg" id="heroIMG" style="display:block; width:100%; height:100%; object-fit:cover;">
           </div>
 
+          <!-- Upload FAB hidden via CSS -->
           <button class="upload-fab" onclick="document.getElementById('heroUpload').click()" title="Upload photo">
             <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M17 8l-5-5-5 5M12 3v12"/></svg>
           </button>
@@ -748,14 +814,14 @@ footer{
     </div>
     <div class="about-grid">
 
-
-<div class="about-left reveal">
+      <div class="about-left reveal">
         <div class="about-card" onclick="document.getElementById('aboutUpload').click()">
           <div class="about-ph" id="aboutPH" style="display:none;">
             <svg width="46" height="46" fill="none" stroke="currentColor" stroke-width="1" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
             <span>Click to add<br>your photo</span>
           </div>
           <img id="aboutIMG" src="niha.jpg" alt="Niha Hawas" style="display:block; width:100%; height:100%; object-fit:cover;">
+          <!-- Upload FAB hidden via CSS -->
           <button class="about-fab" onclick="event.stopPropagation();document.getElementById('aboutUpload').click()">
             <svg width="13" height="13" fill="none" stroke="#08090d" stroke-width="2.5" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M17 8l-5-5-5 5M12 3v12"/></svg>
           </button>
@@ -768,7 +834,6 @@ footer{
           <div class="ast"><div class="ast-n">∞</div><div class="ast-l">Curiosity</div></div>
         </div>
       </div>
-
 
       <div class="about-right reveal d2">
         <h3>CS Student.<br><em>Builder.</em> Problem Solver.</h3>
@@ -796,7 +861,7 @@ footer{
           </div>
           <div class="tl-item">
             <div class="tl-badge">Growing</div>
-            <div class="tl-title">4+ Projects Across Web & amp; Mobile</div>
+            <div class="tl-title">4+ Projects Across Web &amp; Mobile</div>
             <div class="tl-desc">Expanded into Android, Bluetooth APIs, Hibernate ORM, and financial dashboard systems.</div>
           </div>
           <div class="tl-item">
@@ -1051,7 +1116,6 @@ footer{
       <div class="sec-h" style="text-align:center">Let's <em>Work Together</em></div>
       <p class="contact-sub">I'm actively looking for internships and collaboration opportunities. Whether you have an open role, a project idea, or just want to connect — I'd love to hear from you.</p>
       <div class="c-row">
-        <!-- ✅ FIX: Email Me → opens Gmail compose with your email pre-filled in To: -->
         <a href="https://mail.google.com/mail/?view=cm&to=nihahawasniha148@gmail.com&su=Hello+Niha" target="_blank" class="clink">
           <div class="cl-ico">
             <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
