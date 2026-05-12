@@ -653,6 +653,13 @@ footer{
   .mobile-menu a { font-size: 1.5rem; }
 }
 
+.photo-circle img, #aboutIMG, #heroIMG {
+  pointer-events: none;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+}
+
 .about-card{
     position: relative;
     overflow: hidden;
@@ -665,6 +672,13 @@ footer{
     display:block;
     border-radius:24px;
 }
+
+document.querySelectorAll('img').forEach(img => {
+  img.addEventListener('contextmenu', e => e.preventDefault());
+  img.addEventListener('dragstart', e => e.preventDefault());
+});
+
+
 </style>
 </head>
 <body>
@@ -814,7 +828,7 @@ footer{
     <div class="about-grid">
 
       <div class="about-left reveal">
-        <div class="about-card" onclick="document.getElementById('aboutUpload').click()">
+        <div class="about-card">
           <div class="about-ph" id="aboutPH" style="display:none;">
             <svg width="46" height="46" fill="none" stroke="currentColor" stroke-width="1" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
             <span>Click to add<br>your photo</span>
