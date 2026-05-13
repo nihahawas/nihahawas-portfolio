@@ -678,11 +678,6 @@ footer{
     border-radius:24px;
 }
 
-document.querySelectorAll('img').forEach(img => {
-  img.addEventListener('contextmenu', e => e.preventDefault());
-  img.addEventListener('dragstart', e => e.preventDefault());
-});
-
 
 </style>
 </head>
@@ -1390,6 +1385,15 @@ counterEls.forEach(el=>counterObserver.observe(el));
             revealObserver.observe(el);
         });
     });
+
+document.querySelectorAll('img').forEach(img => {
+  img.addEventListener('contextmenu', e => e.preventDefault());
+  img.addEventListener('dragstart', e => e.preventDefault());
+});
+
+
+
+
 </script>
 </body>
 </html>
